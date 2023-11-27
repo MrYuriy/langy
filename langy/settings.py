@@ -32,7 +32,7 @@ SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", "") != "False"
 
 ALLOWED_HOSTS = [
-    "https://langy.onrender.com",
+    "langy.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
