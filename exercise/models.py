@@ -18,7 +18,7 @@ class Word(models.Model):
     )
 
     name = models.CharField(max_length=20)
-    language = models.ManyToManyField(Language)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     difficulty_level = models.CharField(max_length=6, choices=DIFFICULT_LEVEL_CHOICES)
 
     def __str__(self):
