@@ -175,3 +175,5 @@ CORS_ALLOWED_ORIGINS = [
     "https://127.0.0.1:5173",
     "https://localhost:3000",
 ]
+
+NUMBER_OF_WORDS_SESSION = 3

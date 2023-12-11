@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Language, Word, UserWord
+from .models import Language, Word, UserWord, Dictionary
 
 
 @admin.register(Language)
@@ -17,3 +17,8 @@ class WordAdmin(admin.ModelAdmin):
 class UserWordAdmin(admin.ModelAdmin):
     list_display = ("user", "word", "native_word", "day_to_repeat", "status")
     list_filter = ("user", "status")
+
+
+@admin.register(Dictionary)
+class DictionaryAdmin(admin.ModelAdmin):
+    list_filter = ("language", )

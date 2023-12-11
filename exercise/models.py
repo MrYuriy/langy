@@ -10,9 +10,24 @@ class Language(models.Model):
         return self.name
 
 
+class Dictionary(models.Model):
+    DIFFICULT_LEVEL_CHOICES = (
+        ("Easy", "Easy"),
+        ("Middle", "Middle"),
+        ("Hard", "Hard"),
+    )
+
+    language = models.CharField(max_length=10)
+    difficulty_level = models.CharField(max_length=6, choices=DIFFICULT_LEVEL_CHOICES)
+    dictionary = models.JSONField()
+
+    def __str__(self):
+        return self.language
+
+
 class Word(models.Model):
     DIFFICULT_LEVEL_CHOICES = (
-        ("Easy", "Eazy"),
+        ("Eazy", "Eazy"),
         ("Middle", "Middle"),
         ("Hard", "Hard"),
     )
