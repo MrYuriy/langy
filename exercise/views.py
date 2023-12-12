@@ -15,7 +15,7 @@ class ExerciseView(APIView):
 
     def get(self, request, *args, **kwargs):
         user = self.request.user
-        queryset = UserWord.objects.filter(day_to_repeat=date.today())
+        queryset = UserWord.objects.filter(day_to_repeat__деу=date.today())
 
         # queryset = UserWord.objects.filter(user=user, day_to_repeat=date.today())
         if len(queryset) < settings.NUMBER_OF_WORDS_SESSION:
