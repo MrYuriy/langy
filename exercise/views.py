@@ -16,10 +16,11 @@ class ExerciseView(APIView):
     def get(self, request, *args, **kwargs):
         user = self.request.user
         queryset = UserWord.objects.filter(day_to_repeat__lte=date.today())
-
+        count_words = int(request.query_params.get("count-words", settings.NUMBER_OF_WORDS_SESSION))
         # queryset = UserWord.objects.filter(user=user, day_to_repeat=date.today())
-        if len(queryset) < settings.NUMBER_OF_WORDS_SESSION:
+        if len(queryset) < count_words:
             queryset = get_new_word_to_learn(user_word=queryset)
-
+        else:
+            queryset = queryset[:count_words]
         serializer = ExerciseSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
