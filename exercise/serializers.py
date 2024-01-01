@@ -13,10 +13,15 @@ class WordExerciseSerializer(serializers.Serializer):
     name = serializers.CharField()
 
 
-class ExerciseSerializer(serializers.ModelSerializer):
+class GetCardSerializer(serializers.ModelSerializer):
     word = WordExerciseSerializer()
     native_word = serializers.CharField(source="native_word.name", read_only=True)
 
     class Meta:
         model = UserWord
         fields = ("word", "native_word",)
+
+
+class AnalizAnswerSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    value = serializers.BooleanField()

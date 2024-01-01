@@ -1,5 +1,4 @@
 from .models import Word, UserWord, Dictionary, Language
-from langy.settings import NUMBER_OF_WORDS_SESSION
 from django.contrib.auth import get_user_model
 from datetime import date
 
@@ -14,15 +13,15 @@ def get_missing_word(dictionary, native_dictionary, count_word_to_return):
     return result_items
 
 
-def get_new_word_to_learn(user_word, user=None):
-    learning_language = user_word[0].word.language
+def get_new_word_to_learn(count_words, user_word, user=None,):
+    learning_language = Language.objects.get(name="English")
     ua_language = Language.objects.get(name="Ukrainian")
     User = get_user_model()
     user = User.objects.get(email="admin@gmail.com")
 
     native_dictionary = user_word.values_list("word__name", flat=True)
-    dictionary = Dictionary.objects.get(language="English").dictionary
-    count_word_to_return = NUMBER_OF_WORDS_SESSION - len(user_word)
+    dictionary = Dictionary.objects.get(language="English", difficulty_level='Middle').dictionary
+    count_word_to_return = count_words - len(user_word)
     result_items = get_missing_word(
         dictionary=dictionary,
         native_dictionary=native_dictionary,
