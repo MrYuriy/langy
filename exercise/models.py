@@ -59,19 +59,20 @@ class UserWord(models.Model):
 
     def increase_repeat_level(self):
         # Find the index of the current day_repeat_level in DAY_REPEAT_LEVEL
-        print(self.day_repeat_level)
+        #print(self.day_repeat_level)
         current_index = next(
-            (i for i, v in enumerate(self.DAY_REPEAT_LEVEL) if v[1] == self.day_repeat_level), None)
+            (i for i, v in enumerate(self.DAY_REPEAT_LEVEL) if v[0] == self.day_repeat_level), None)
         if current_index is None:
             current_index = 0
 
         if current_index < len(self.DAY_REPEAT_LEVEL) - 1:
             # Increase day_repeat_level by the value of the next level in DAY_REPEAT_LEVEL
             next_level_value = self.DAY_REPEAT_LEVEL[current_index + 1][1]
+            #print(current_index)
             self.day_repeat_level = int(next_level_value)
             self.day_to_repeat = date.today() + timedelta(days=int(next_level_value))
             self.save()
-            print("After save", self.day_to_repeat, self.day_repeat_level)
+            #print("After save", self.day_to_repeat, self.day_repeat_level)
         else:
             self.status = True
 
