@@ -15,7 +15,7 @@ class WordAdmin(admin.ModelAdmin):
 
 @admin.register(UserWord)
 class UserWordAdmin(admin.ModelAdmin):
-    list_display = ("user", "word", "native_word", "day_to_repeat", "status")
+    list_display = ("user", "word", "native_word", "day_to_repeat", "day_repeat_level", "status")
     list_filter = ("user", "status")
 
 
