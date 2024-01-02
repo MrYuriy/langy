@@ -24,4 +24,4 @@ class GetCardSerializer(serializers.ModelSerializer):
 
 class AnalizAnswerSerializer(serializers.Serializer):
     id = serializers.IntegerField()
-    value = serializers.BooleanField()
+    status = serializers.BooleanField()

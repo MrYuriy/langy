@@ -22,6 +22,7 @@ def get_new_word_to_learn(count_words, user_word, user=None,):
     native_dictionary = user_word.values_list("word__name", flat=True)
     dictionary = Dictionary.objects.get(language="English", difficulty_level='Middle').dictionary
     count_word_to_return = count_words - len(user_word)
+    print(f"Count word to return {count_word_to_return}")
     result_items = get_missing_word(
         dictionary=dictionary,
         native_dictionary=native_dictionary,
@@ -40,8 +41,6 @@ def get_new_word_to_learn(count_words, user_word, user=None,):
             user=user,
             word=eng,
             native_word=ua,
-            day_to_repeat=date.today(),
-            status=False
         )
         for eng, ua in zip(eng_words, ua_words)
     ]

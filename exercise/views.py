@@ -8,6 +8,7 @@ from datetime import date, datetime, timedelta
 from langy import settings
 from .utils import get_new_word_to_learn
 from .serializers import GetCardSerializer, AnalizAnswerSerializer
+from django.contrib.auth import get_user_model
 
 
 class ExerciseView(APIView):
@@ -26,17 +27,17 @@ class ExerciseView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-
+        User = get_user_model()
+        user = User.objects.get(email="admin@gmail.com")
         data = self.request.data
         serializer = AnalizAnswerSerializer(data=data)
 
         if serializer.is_valid():
+            user_word = UserWord.objects.filter(user=user, word__id=data["id"])[0]
             if data["status"]:
-                print((data["id"]))
-                pass
+                user_word.increase_repeat_level()
             else:
-                user_word = UserWord.objects.filter(word__id=data["id"])
-                user_word.day_to_repeat = date.today() + timedelta(days=1)
+                user_word.reduce_repeat_level()
 
             return Response(status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
