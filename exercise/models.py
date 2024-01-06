@@ -12,14 +12,7 @@ class Language(models.Model):
 
 
 class Dictionary(models.Model):
-    DIFFICULT_LEVEL_CHOICES = (
-        ("Easy", "Easy"),
-        ("Middle", "Middle"),
-        ("Hard", "Hard"),
-    )
-
-    language = models.CharField(max_length=10)
-    difficulty_level = models.CharField(max_length=6, choices=DIFFICULT_LEVEL_CHOICES)
+    name = models.CharField(max_length=10)
     dictionary = models.JSONField()
 
     def __str__(self):
@@ -27,15 +20,11 @@ class Dictionary(models.Model):
 
 
 class Word(models.Model):
-    DIFFICULT_LEVEL_CHOICES = (
-        ("Eazy", "Eazy"),
-        ("Middle", "Middle"),
-        ("Hard", "Hard"),
-    )
 
     name = models.CharField(max_length=20)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    difficulty_level = models.CharField(max_length=6, choices=DIFFICULT_LEVEL_CHOICES)
+    false_answer_count = models.IntegerField(default=0)
+    true_answer_count = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name

@@ -9,8 +9,8 @@ class LanguageAdmin(admin.ModelAdmin):
 
 @admin.register(Word)
 class WordAdmin(admin.ModelAdmin):
-    list_display = ("name", "difficulty_level")
-    list_filter = ("name", "language", "difficulty_level")
+    list_display = ("name", "language", "false_answer_count", "true_answer_count")
+    list_filter = ("name", "language", "false_answer_count", "true_answer_count")
 
 
 @admin.register(UserWord)
@@ -18,7 +18,6 @@ class UserWordAdmin(admin.ModelAdmin):
     list_display = ("user", "word", "native_word", "day_to_repeat", "day_repeat_level", "status")
     list_filter = ("user", "status")
 
-
 @admin.register(Dictionary)
 class DictionaryAdmin(admin.ModelAdmin):
-    list_filter = ("language", )
+    list_filter = ("name",)
