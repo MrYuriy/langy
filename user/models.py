@@ -25,8 +25,8 @@ class User(AbstractUser):
     user_permissions = models.ManyToManyField(Permission, related_name="user_set", blank=True,
                                               verbose_name=_("user permissions"))
     
-    native_language = models.CharField(max_length=10, choices=LANGUAGE_CODE, blank=True)
-    learn_language = models.CharField(max_length=10, choices=LANGUAGE_CODE, blank=True)
+    native_language = models.CharField(max_length=10, choices=LANGUAGE_CODE)
+    learn_language = models.CharField(max_length=10, choices=LANGUAGE_CODE)
 
     def __str__(self):
         return self.email
