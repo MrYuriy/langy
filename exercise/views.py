@@ -15,19 +15,20 @@ class ExerciseView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        user = self.request.user
+        user = request.user
+         
         queryset = UserWord.objects.filter(user=user, day_to_repeat__lte=date.today())
         count_words = int(request.query_params.get("count-words", settings.NUMBER_OF_WORDS_SESSION))
 
         if len(queryset) < count_words:
-            queryset = get_new_word_to_learn(count_words, user_word=queryset)
+            queryset = get_new_word_to_learn(count_words, user_word=queryset, user=user)
         else:
             queryset = queryset[:count_words]
         serializer = GetCardSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request, *args, **kwargs):
-        user = self.request.user
+        user = request.user
         data = self.request.data
         serializer = AnalizAnswerSerializer(data=data)
 

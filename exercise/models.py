@@ -16,7 +16,7 @@ class Dictionary(models.Model):
     dictionary = models.JSONField()
 
     def __str__(self):
-        return self.language
+        return self.name
 
 
 class Word(models.Model):
