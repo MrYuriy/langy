@@ -91,23 +91,23 @@ WSGI_APPLICATION = "langy.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# DATABASE_URL = os.environ.get("DATABASE_URL")
-
-# if DATABASE_URL is not None:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default=DATABASE_URL,
-#             conn_max_age=600,
-#             conn_health_checks=True,
-#         ),
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
+# }
+
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+if DATABASE_URL is not None:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600,
+            conn_health_checks=True,
+        ),
+    }
 
 
 # Password validation
